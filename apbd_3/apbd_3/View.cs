@@ -4,9 +4,9 @@ namespace apbd_3;
 
 public class View
 {
-    public void showShipsAndContainers(List<ContainerShip> ships)
+    public void showShipsAndContainers(List<ContainerShip> ships, List<Container> freeContainers)
     {
-        Console.WriteLine("List of container ships: ");
+        Console.WriteLine("\nList of container ships: ");
         if (ships.Count == 0)
         {
             Console.WriteLine("None");
@@ -19,42 +19,33 @@ public class View
             }
         }
         
-        Console.WriteLine("List of containers: ");
-        if (ships.Count == 0)
+        Console.WriteLine("\nList of containers: ");
+        if (freeContainers.Count == 0)
         {
             Console.WriteLine("None");
         }
         else
         {
-            for (int i = 0; i < ships.Count; i++)
+            for (int i = 0; i < freeContainers.Count; i++)
             {
-                for (int j = 0; j < ships[i].allShippedContainers.Count; j++)
-                {
-                    Console.WriteLine("Container " + j + " " + ships[i].allShippedContainers[j].ToString());
-                }
+                Console.WriteLine("Container " + i + " " + freeContainers[i].ToString());
             }
         }
     }
 
 
-    public int showActions(List<ContainerShip> ships)
+    public int showActions(List<ContainerShip> ships, List<Container> freeContainers)
     {
-        int numberOfContainers = 0;
-        for (int i = 0; i < ships.Count; i++)
-        {
-            numberOfContainers += ships[i].allShippedContainers.Count;
-        }
-
-        Console.WriteLine("Possible actions:");
+        Console.WriteLine("\nPossible actions:");
         if (ships.Count == 0)
         {
             Console.WriteLine("1. - Create a container ship");
-        } else if (ships.Count > 0 && numberOfContainers == 0)
+        } else if (ships.Count > 0 && freeContainers.Count == 0)
         {
             Console.WriteLine("1. - Create a container ship");
             Console.WriteLine("2. - Delete a container ship");
             Console.WriteLine("3. - Create a container");
-        } else if (ships.Count > 0 && numberOfContainers > 0)
+        } else if (ships.Count > 0 && freeContainers.Count > 0)
         {
             Console.WriteLine("1. - Create a container ship");
             Console.WriteLine("2. - Delete a container ship");
@@ -116,6 +107,7 @@ public class View
             default:
                 return createContainer();
         }
+        
     }
 
     public int listAllContainers(List<Container> containers)

@@ -12,6 +12,7 @@ public class Controller
     public Controller()
     {
         ships = new List<ContainerShip>();
+        freeContainers = new List<Container>();
         view = new View();
     }
 
@@ -19,8 +20,8 @@ public class Controller
     {
         while (true)
         {
-            view.showShipsAndContainers(ships);
-            switch (view.showActions(ships))
+            view.showShipsAndContainers(ships, freeContainers);
+            switch (view.showActions(ships, freeContainers))
             {
                 case 1:
                     ships.Add(view.enterShipInfo());
