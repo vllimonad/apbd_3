@@ -34,18 +34,18 @@ public class View
     }
 
 
-    public int showActions(List<ContainerShip> ships, List<Container> freeContainers)
+    public int showActions(List<ContainerShip> ships, List<Container> containers)
     {
         Console.WriteLine("\nPossible actions:");
         if (ships.Count == 0)
         {
             Console.WriteLine("1. - Create a container ship");
-        } else if (ships.Count > 0 && freeContainers.Count == 0)
+        } else if (ships.Count > 0 && containers.Count == 0)
         {
             Console.WriteLine("1. - Create a container ship");
             Console.WriteLine("2. - Delete a container ship");
             Console.WriteLine("3. - Create a container");
-        } else if (ships.Count > 0 && freeContainers.Count > 0)
+        } else if (ships.Count > 0 && containers.Count > 0)
         {
             Console.WriteLine("1. - Create a container ship");
             Console.WriteLine("2. - Delete a container ship");
@@ -55,6 +55,8 @@ public class View
             Console.WriteLine("6. - Unload cargo from container");
             Console.WriteLine("7. - Load container onto a ship");
             Console.WriteLine("8. - Remove container from the ship");
+            Console.WriteLine("9. - Print information about container");
+            Console.WriteLine("10. - Print information about ship and its cargo");
         }
         return Convert.ToInt32(Console.ReadLine());
     }
@@ -119,6 +121,19 @@ public class View
         Console.WriteLine("Enter container number:");
         return Convert.ToInt32(Console.ReadLine());
     }
+    
+    public int listFreeContainers(List<Container> containers)
+    {
+        for (int j = 0; j < containers.Count; j++)
+        {
+            if (!containers[j].loadedOntoShip)
+            {
+                Console.WriteLine("Container " + j + " " + containers[j].ToString());
+            }
+        }
+        Console.WriteLine("Enter container number:");
+        return Convert.ToInt32(Console.ReadLine());
+    }
 
     public double loadContainer()
     {
@@ -151,5 +166,18 @@ public class View
             ((RefrigeratedContainer)container).temperature = temperature;
         }
     }
+
+    public void getInfoAboutContainer(List<Container> containers)
+    {
+        Console.WriteLine("Enter container numuber: ");
+        Console.WriteLine(containers[Convert.ToInt32(Console.ReadLine())].ToString());
+    }
     
+    public void getInfoAboutShip(List<ContainerShip> ships)
+    {
+        Console.WriteLine("Enter container ship numuber: ");
+        int index = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine(ships[index].ToString());
+        listAllContainers(ships[index].allShippedContainers);
+    }
 }

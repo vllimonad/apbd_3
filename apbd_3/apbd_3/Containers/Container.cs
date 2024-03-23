@@ -8,13 +8,15 @@ public class Container
     public double depth;
     public string number;
     public double maximumPayload;
+    public bool loadedOntoShip;
 
     public Container(double height, double weight, double depth, double maxPayload)
     {
         this.height = height;
         this.weight = weight;
         this.depth = depth;
-        this.maximumPayload = maxPayload;
+        maximumPayload = maxPayload;
+        loadedOntoShip = false;
     }
 
     public void setNumber(int num)
