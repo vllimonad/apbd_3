@@ -9,18 +9,12 @@ public class LiquidContainer: Container, IHazardNotifier
         number = "CON-" + "L-";
         isHazard = false;
     }
-
-    public override void load(double mass)
-    {
-        base.load(mass);
-        isDangerous();
-    }
     
     public void setIsHazard(bool b)
     {
         isHazard = b;
         notifyAboutHazard();
-        isDangerous();
+        checkMass();
     }
     
     public void notifyAboutHazard()
@@ -31,7 +25,7 @@ public class LiquidContainer: Container, IHazardNotifier
         }
     }
 
-    public void isDangerous()
+    public override void checkMass()
     {
         if (isHazard)
         {
