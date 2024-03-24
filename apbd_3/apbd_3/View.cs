@@ -148,22 +148,35 @@ public class View
             Console.WriteLine("Is it hazardous cargo? ");
             Console.WriteLine("1. - Yes");
             Console.WriteLine("2. - No");
-            int ishazard = Convert.ToInt32(Console.ReadLine());
-            if (ishazard == 1)
+            if (Convert.ToInt32(Console.ReadLine()) == 1)
             {
-                ((LiquidContainer)container).isHazard = true;
-                ((LiquidContainer)container).notifyAboutHazard();
-                ((LiquidContainer)container).isDangerous();
+                ((LiquidContainer)container).setIsHazard(true);
             }
             else
             {
-                ((LiquidContainer)container).isHazard = false;
+                ((LiquidContainer)container).setIsHazard(false);
             }
         } else if (container.number.Contains("CON-C-"))
         {
             Console.WriteLine("Enter container temperature: ");
             double temperature = Convert.ToDouble(Console.ReadLine());
             ((RefrigeratedContainer)container).temperature = temperature;
+            Console.WriteLine("Enter cargo product type: ");
+            ((RefrigeratedContainer)container).setProductType(Console.ReadLine());
+        }
+        else
+        {
+            Console.WriteLine("Is it hazardous cargo? ");
+            Console.WriteLine("1. - Yes");
+            Console.WriteLine("2. - No");
+            if (Convert.ToInt32(Console.ReadLine()) == 1)
+            {
+                ((GasContainer)container).setIsHazard(true);
+            }
+            else
+            {
+                ((GasContainer)container).setIsHazard(false);
+            }
         }
     }
 

@@ -30,6 +30,7 @@ public class Container
     public virtual void load(double mass)
     {
         cargoMass = mass;
+        checkMass();
     }
 
     public virtual void checkMass()

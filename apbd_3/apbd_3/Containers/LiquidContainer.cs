@@ -7,11 +7,28 @@ public class LiquidContainer: Container, IHazardNotifier
     public LiquidContainer(double height, double weight, double depth, double maxPayload) : base(height, weight, depth, maxPayload)
     {
         number = "CON-" + "L-";
+        isHazard = false;
+    }
+
+    public override void load(double mass)
+    {
+        base.load(mass);
+        isDangerous();
+    }
+    
+    public void setIsHazard(bool b)
+    {
+        isHazard = b;
+        notifyAboutHazard();
+        isDangerous();
     }
     
     public void notifyAboutHazard()
     {
-        Console.WriteLine("Hazardous situation in container " + number);
+        if (isHazard)
+        {
+            Console.WriteLine("Hazardous situation in container " + number);
+        }
     }
 
     public void isDangerous()
